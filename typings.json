@@ -1,5 +1,6 @@
 {
   "ambientDependencies": {
+    "mail-listener": "file:definitions/mail-listener.d.ts",
     "moment-timezone": "github:DefinitelyTyped/DefinitelyTyped/moment-timezone/moment-timezone.d.ts",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts",
     "nodemailer": "github:DefinitelyTyped/DefinitelyTyped/nodemailer/nodemailer.d.ts",

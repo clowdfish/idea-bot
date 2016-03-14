@@ -1,0 +1,12 @@
+{
+  "username": "genie@efexcon.com",
+  "password": "answer42!",
+  "imap": {
+    "hostname": "mail.efexcon.com",
+    "port": 993
+  },
+  "smtp": {
+    "hostname": "mail.efexcon.com",
+    "port": 465
+  }
+}
