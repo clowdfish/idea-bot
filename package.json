@@ -1,0 +1,35 @@
+{
+  "name": "idea-bot",
+  "version": "1.0.0",
+  "description": "The bot that is responsible for parsing incoming messages and answering to the client.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clowdfish/idea-bot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clowdfish/idea-bot/issues"
+  },
+  "homepage": "https://github.com/clowdfish/idea-bot#readme",
+  "dependencies": {
+    "es6-promise": "^3.0.2",
+	"mail-listener": "^0.7.1",
+    "moment": "^2.11.1",
+    "moment-timezone": "^0.5.0",
+    "nodemailer": "^2.1.0",
+    "underscore": "^1.8.3"
+  },
+   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-typescript": "^2.10.0"
+  }
+}
