@@ -1,12 +1,17 @@
 {
-  "username": "genie@efexcon.com",
+  "username": "genie@clowdfish.com",
   "password": "answer42!",
   "imap": {
-    "hostname": "mail.efexcon.com",
+    "hostname": "mail.clowdfish.com",
     "port": 993
   },
   "smtp": {
-    "hostname": "mail.efexcon.com",
+    "hostname": "mail.clowdfish.com",
     "port": 465
-  }
+  },
+  "mailgun": {
+    "apiKey": "key-24d71ce06fcd86621d81ec2820c791df",
+    "domain": "mg.clowdfish.com"
+  },
+  "receiver": "info@clowdfish.com"
 }

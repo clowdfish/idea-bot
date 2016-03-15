@@ -1,6 +1,11 @@
 import MailListener = require("mail-listener");
+import Mailgun = require('mailgun-js');
 
 var MailConfig = require("../config/mail.config.json");
+var mailgun = Mailgun({
+    apiKey: MailConfig('mailgun.apiKey'),
+    domain: MailConfig('mailgun.domain')
+});
 
 /**
  *
@@ -35,10 +40,34 @@ export class EmailAdapter implements IAdapter {
 
             mailListener.on("mail:parsed", function (mail) {
                 // do something with mail object including attachments
-                console.log("emailParsed", mail.attachments);
-                // mail processing code goes here
+                this.parse(mail);
             });
         }
+    }
+
+    parse(email:any) {
+        // TODO implement parsing
+
+        console.log("emailParsed", email.attachments);
+        // mail processing code goes here
+    }
+
+    respond(receivers:string[], subject:string, message:string) {
+
+        var sender = 'Genie <' + MailConfig.username + '>';
+
+        var data = {
+            from: sender,
+            to: receivers,
+            subject: subject,
+            html: message
+        };
+
+        mailgun.messages().send(data, function (err, body) {
+            if (err) console.error(err);
+            else
+                console.log("Answer was sent.");
+        });
     }
 
     destroy():void {

@@ -18,13 +18,14 @@
   "homepage": "https://github.com/clowdfish/idea-bot#readme",
   "dependencies": {
     "es6-promise": "^3.0.2",
-	"mail-listener": "^0.7.1",
+    "mail-listener": "^0.7.1",
+    "mailgun-js": "^0.7.7",
     "moment": "^2.11.1",
     "moment-timezone": "^0.5.0",
     "nodemailer": "^2.1.0",
     "underscore": "^1.8.3"
   },
-   "devDependencies": {
+  "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-notify": "^2.2.0",
