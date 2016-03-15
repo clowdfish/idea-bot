@@ -28,12 +28,19 @@ export class EmailAdapter implements IAdapter {
         if(!EmailAdapter.listener) {
             EmailAdapter.listener = notifier(Imap);
 
-            EmailAdapter.listener.on('end', function () { // session closed
-                EmailAdapter.listener.start();
-            }).on('mail',function(mail){
-                //console.log(mail.from[0].address, mail.subject);
-                EmailAdapter.parse(mail);
-            }).start();
+            EmailAdapter.listener
+                .on('error', function(err) {
+                    console.error(err);
+                    EmailAdapter.listener.start();
+                })
+                .on('end', function () { // session closed
+                    EmailAdapter.listener.start();
+                })
+                .on('mail',function(mail){
+                    //console.log(mail.from[0].address, mail.subject);
+                    EmailAdapter.parse(mail);
+                })
+                .start();
         }
     }
 
