@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/clowdfish/idea-bot#readme",
   "dependencies": {
+    "config": "^1.19.0",
     "es6-promise": "^3.0.2",
-    "mail-listener": "^0.7.1",
+    "mail-notifier": "^0.3.0",
     "mailgun-js": "^0.7.7",
     "moment": "^2.11.1",
     "moment-timezone": "^0.5.0",

@@ -1,10 +1,19 @@
-import MailListener = require("mail-listener");
-import Mailgun = require('mailgun-js');
+import config = require('config');
+import notifier = require('mail-notifier');
+import mailgun = require('mailgun-js');
 
-var MailConfig = require("../config/mail.config.json");
-var mailgun = Mailgun({
-    apiKey: MailConfig('mailgun.apiKey'),
-    domain: MailConfig('mailgun.domain')
+var Imap = {
+    user: config.get('username'),
+    password: config.get('password'),
+    host: config.get('imap.hostname'),
+    port: config.get('imap.port'),
+    tls: true,
+    tlsOptions: { rejectUnauthorized: false }
+};
+
+var Mailgun = mailgun({
+    apiKey: config.get('mailgun.apiKey'),
+    domain: config.get('mailgun.domain')
 });
 
 /**
@@ -17,44 +26,46 @@ export class EmailAdapter implements IAdapter {
     initialize():void {
 
         if(!EmailAdapter.listener) {
-            var mailListener = new MailListener({
-                username: MailConfig.username,
-                password: MailConfig.password,
-                host: MailConfig.imap.hostname,
-                port: MailConfig.imap.port,
-                secure: true, // use secure connection
-                mailbox: "INBOX", // mailbox to monitor
-                markSeen: true, // all fetched email willbe marked as seen and not fetched next time
-                fetchUnreadOnStart: true // use it only if you want to get all unread email on lib start. Default is `false`
-            });
+            EmailAdapter.listener = notifier(Imap);
 
-            mailListener.start();
-
-            mailListener.on("server:connected", function () {
-                console.log("imapConnected");
-            });
-
-            mailListener.on("mail:arrived", function (id) {
-                console.log("new mail arrived with id:" + id);
-            });
-
-            mailListener.on("mail:parsed", function (mail) {
-                // do something with mail object including attachments
-                this.parse(mail);
-            });
+            EmailAdapter.listener.on('end', function () { // session closed
+                EmailAdapter.listener.start();
+            }).on('mail',function(mail){
+                //console.log(mail.from[0].address, mail.subject);
+                EmailAdapter.parse(mail);
+            }).start();
         }
     }
 
-    parse(email:any) {
+    /**
+     * Once the users include the idea-bot into their conversation, the
+     * conversation must be parsed to get information chunks out of it that can
+     * be stored in the database.
+     *
+     * @param email
+     */
+    static parse(email:any) {
         // TODO implement parsing
 
-        console.log("emailParsed", email.attachments);
+        console.log("Email:");
+        console.log(email);
+
+        //console.log("emailParsed", email.attachments);
         // mail processing code goes here
     }
 
-    respond(receivers:string[], subject:string, message:string) {
+    /**
+     * Once a new idea was created the bot will send a message to all parties.
+     * It can also send messages pro-actively, if it is required for the user
+     * experience.
+     *
+     * @param receivers
+     * @param subject
+     * @param message
+     */
+    static respond(receivers:string[], subject:string, message:string) {
 
-        var sender = 'Genie <' + MailConfig.username + '>';
+        var sender = 'Genie <' + config.get('username') + '>';
 
         var data = {
             from: sender,
@@ -63,7 +74,7 @@ export class EmailAdapter implements IAdapter {
             html: message
         };
 
-        mailgun.messages().send(data, function (err, body) {
+        Mailgun.messages().send(data, function (err, body) {
             if (err) console.error(err);
             else
                 console.log("Answer was sent.");
