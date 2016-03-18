@@ -63,7 +63,7 @@ export class EmailAdapter implements IAdapter {
         // TODO implement parsing
         // mail processing code goes here
 
-        console.log("Email:");
+        //console.log("Email:");
 
         // lets do something with that email thread!
         // split into lines and clean the dashes
@@ -177,6 +177,12 @@ export class EmailAdapter implements IAdapter {
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
                 console.log('Response: ' + chunk);
+                var jsonchunk = JSON.parse(chunk);
+                if (jsonchunk.hasOwnProperty("key")) {
+                    EmailAdapter.buildWelcomeMessage(jsonchunk.key, title, owners, jsonchunk.isNew);
+                } else {
+                    console.error("Something wrong with reply from API");
+                }
 
             });
         });
@@ -193,8 +199,19 @@ export class EmailAdapter implements IAdapter {
      * Function constructs the message structure and sends data to the respond() function for sending
      */
 
-    static buildWelcomeMessage() {
+    static buildWelcomeMessage(ideaKey:string, subject: string, receivers:string[], isNew:boolean) {
         //TODO: Make message text
+        console.log(isNew);
+        if (isNew) {
+            var message = "<h1>Hello Colleagues</h1><p>Thank you for including me!</p><p>I set up the idea for ya'll. Follow the link below to get going!</p><div><a href='localhost/idea/"+ideaKey+"'>Idea Page: "+subject+"</a> </div>";
+
+        } else {
+            var message = "<h1>Hello Colleagues</h1><p>Thank you for including me!</p><p>This idea is already in the Database! Here is the link for that one, but I guess I should just stop writing you. Don't include me in these conversations anymore!</p><div><a href='localhost/idea/"+ideaKey+"'>Idea Page: "+subject+"</a> </div>";
+
+        }
+
+        console.log("building email");
+        EmailAdapter.respond(receivers,subject,message);
     }
 
     /**
