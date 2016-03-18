@@ -1,6 +1,8 @@
 import config = require('config');
 import notifier = require('mail-notifier');
 import mailgun = require('mailgun-js');
+import http = require('http');
+import querystring = require('querystring');
 
 var Imap = {
     user: config.get('username'),
@@ -15,6 +17,12 @@ var Mailgun = mailgun({
     apiKey: config.get('mailgun.apiKey'),
     domain: config.get('mailgun.domain')
 });
+
+interface Message {
+    text: string;
+    date: string;
+    email: string;
+}
 
 /**
  *
@@ -53,12 +61,140 @@ export class EmailAdapter implements IAdapter {
      */
     static parse(email:any) {
         // TODO implement parsing
+        // mail processing code goes here
 
         console.log("Email:");
-        console.log(email);
+
+        // lets do something with that email thread!
+        // split into lines and clean the dashes
+        var text = email.text.replace(/\n>+ */g, "\n");
+        var arr = text.split(/\n{2,}/);
+        //console.log(arr.length);
+
+        var messages = [];
+
+        //set date for first message
+        var msgDate = email.date;
+        var msgEmail = email.from[0].address;
+        var msgText = "";
+
+        for (var _i = 0; _i < arr.length; _i++) {
+            var item = arr[_i];
+
+            //check if meta or message
+            if (item.charAt(item.length-1) == ":") {
+                //means meta
+                //create Message and push and clean
+                messages.push({
+                    date : msgDate,
+                    email : msgEmail,
+                    text : msgText
+                });
+
+                msgDate = "";
+                msgEmail = "";
+                msgText = "";
+
+                //extract email address
+                var regex = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
+                var res = regex.exec(item);
+                //console.log(item);
+                //console.log(res);
+                msgEmail = res[0];
+            } else {
+                //means message, push to message
+                msgText += (item + "\n");
+            }
+        }
+        //dont forget to push the last message!
+        messages.push({
+            date : msgDate,
+            email : msgEmail,
+            text : msgText
+        });
+
+        messages.reverse();
+
+        /**
+         *
+         * Message structure to API
+         * title
+         * description
+         * creator
+         * owners[]
+         * messages[]
+         *
+         **/
+
+        // title
+        var regex = /([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/gi;
+        var title = email.subject.replace(regex,"");
+        // description
+        var description = messages[0].text;
+        // creator
+        var creator = messages[0].email;
+        // all owners
+        var owners = [];
+        email.from.forEach(function(elem, indx) {
+            if (elem.address != "genie@clowdfish.com") {
+                owners.push(elem.address);
+            }
+        });
+
+        email.to.forEach(function(elem, indx) {
+            if (elem.address != "genie@clowdfish.com") {
+                owners.push(elem.address);
+            }
+        });
+
+        email.cc.forEach(function(elem, indx) {
+            if (elem.address != "genie@clowdfish.com") {
+                owners.push(elem.address);
+            }
+        });
+
+        var body = JSON.stringify({
+            title: title,
+            description: description,
+            creator: creator,
+            owners: owners,
+            messages: messages
+        });
+
+        var post_options = {
+            host: 'localhost',
+            port: 10010,
+            json: true,
+            path: '/api/ideas/',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': body.length
+            }
+        };
+
+        var post_req = http.request(post_options, function(res) {
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                console.log('Response: ' + chunk);
+
+            });
+        });
+
+        // post the data
+        post_req.write(body);
+        post_req.end();
 
         //console.log("emailParsed", email.attachments);
-        // mail processing code goes here
+    }
+
+    /**
+     * buildWelcomeMessage
+     * Function constructs the message structure and sends data to the respond() function for sending
+     */
+
+    static buildWelcomeMessage() {
+        //TODO: Make message text
     }
 
     /**
