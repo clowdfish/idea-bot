@@ -18,6 +18,9 @@ var Mailgun = mailgun({
     domain: config.get('mailgun.domain')
 });
 
+/**
+ * Message data structure.
+ */
 interface Message {
     text: string;
     date: string;
@@ -60,10 +63,6 @@ export class EmailAdapter implements IAdapter {
      * @param email
      */
     static parse(email:any) {
-        // TODO implement parsing
-        // mail processing code goes here
-
-        //console.log("Email:");
 
         // lets do something with that email thread!
         // split into lines and clean the dashes
@@ -194,23 +193,29 @@ export class EmailAdapter implements IAdapter {
         //console.log("emailParsed", email.attachments);
     }
 
-    /**
-     * buildWelcomeMessage
-     * Function constructs the message structure and sends data to the respond() function for sending
-     */
-
+  /**
+   * Constructs the message structure and sends data to the respond() function for sending.
+   *
+   * @param ideaKey
+   * @param subject
+   * @param receivers
+   * @param isNew
+   */
     static buildWelcomeMessage(ideaKey:string, subject: string, receivers:string[], isNew:boolean) {
-        //TODO: Make message text
-        console.log(isNew);
+
         if (isNew) {
-            var message = "<h1>Hello Colleagues</h1><p>Thank you for including me!</p><p>I set up the idea for ya'll. Follow the link below to get going!</p><div><a href='localhost/idea/"+ideaKey+"'>Idea Page: "+subject+"</a> </div>";
-
+            var message = "<h1>Hello Colleagues</h1>" +
+              "<p>Thank you for including me!</p>" +
+              "<p>I set up the idea for ya'll. Follow the link below to get going!</p>" +
+              "<div><a href='localhost/idea/"+ideaKey+"'>Idea Page: "+subject+"</a></div>";
         } else {
-            var message = "<h1>Hello Colleagues</h1><p>Thank you for including me!</p><p>This idea is already in the Database! Here is the link for that one, but I guess I should just stop writing you. Don't include me in these conversations anymore!</p><div><a href='localhost/idea/"+ideaKey+"'>Idea Page: "+subject+"</a> </div>";
-
+            var message = "<h1>Hello Colleagues</h1>" +
+              "<p>Thank you for including me!</p>" +
+              "<p>This idea is already in the Database! Here is the link for that one, " +
+              "but I guess I should just stop writing you. Don't include me in these conversations anymore!</p>" +
+              "<div><a href='localhost/idea/"+ideaKey+"'>Idea Page: "+subject+"</a> </div>";
         }
 
-        console.log("building email");
         EmailAdapter.respond(receivers,subject,message);
     }
 

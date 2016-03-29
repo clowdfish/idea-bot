@@ -1,30 +1,34 @@
-{ 'html': '<div dir="ltr">Wuhu</div>\n',
-  'text': 'Wuhu\n',
-  'headers':
-  { 'return-path': '<gros.sascha@gmail.com>',
-    'envelope-to': 'genie@clowdfish.com',
-    'delivery-date': 'Tue, 15 Mar 2016 10:34:31 -0500',
-    'received':
-    [ 'from mail-qk0-f177.google.com ([209.85.220.177]:33242) by serv01.c10683.sgvps.net with esmtps (TLSv1.2:AES128-GCM-SHA256:128) (Exim 4.86) (envelope-from <gros.sascha@gmail.com>) id 1afqzP-0006P6-Ht for genie@clowdfish.com; Tue, 15 Mar 2016 10:34:31 -0500',
-      'by mail-qk0-f177.google.com with SMTP id s5so8444134qkd.0 for <genie@clowdfish.com>; Tue, 15 Mar 2016 08:34:31 -0700 (PDT)',
-      'by 10.55.7.18 with HTTP; Tue, 15 Mar 2016 08:34:11 -0700 (PDT)' ],
-    'dkim-signature': 'v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113; h=mime-version:from:date:message-id:subject:to; bh=ZF7GCVaK8pONu0M/a1yc7TA9yN3NUlhBQ7a3ik1vVKQ=; b=nh3ielikk3PZQ0+3dTB2ziNOEbmSJ0iXDvaCUmFtCtyoMGksN2D6hoHH2BHh5wFSDH WV9gn1M9Q9xoCaTYSn/InZWpFcyKgTWXrOS5gsqPAnJU9X6ZGD9h98nzYpYtIcDgVkCr rPfRjrFLNPuUpi0JjBc5gx+MmQUkYeY4Y/HZfRi5M/iLQBqy+OLAblTIge9+PP1s5fO+ RTdq8mAOBqMrT/BXgdrO4JjT3bMSK0EPTJBM/wS7o4IwOOYUUOy1qKVoTXsQ0bcVO3Dq OaF9lqALMhKi0G+FF9M5vEM0MCljKrbSi5/MwXLMXwitKRxn8Oq2lHtJJ9Jzb9vkO9uC M/mQ==',
-    'x-google-dkim-signature': 'v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20130820; h=x-gm-message-state:mime-version:from:date:message-id:subject:to; bh=ZF7GCVaK8pONu0M/a1yc7TA9yN3NUlhBQ7a3ik1vVKQ=; b=AvVUspsRlaTpLqRLDUorirJdDVWkGnbgbyDa0MP0wLqA2dq8qseHDSxUVbFALmlzyI fi7lWd8ry1Sg6bpMl5uCoVOB7x3ZNm0kBOXVkgBK3U8sf1J94emCqId9laELi4x5fsEb OuF7pnRtD7emsv0VYkpk3y56OdPg/F4Bg+QGBK3g5CTTdJR11YC6O6SqGtei2+o3cxFk xmLbxrQS9y5YqFXfRElknRxGKO1s8ht4JBuAnaPwXe0dFLjKqWARIK+Ax5bEuNnLVzJB jCiIqLhE5D8jWTbZHI8fcF/EyyfrlQwBKkelD//J190SHwUlpQxGRRlUgZAVhTA75FJv FCFA==',
-    'x-gm-message-state': 'AD7BkJKAk43D2JvOIrk9ad8W3XZKDFjvyWV1sX/iA97ZszCoZLAIj8pQ1j1Bqf4ZTLU9Ase7YhCxAIn2QVB81w==',
-    'x-received': 'by 10.55.26.86 with SMTP id a83mr37963661qka.79.1458056070321; Tue, 15 Mar 2016 08:34:30 -0700 (PDT)',
-    'mime-version': '1.0',
-    'from': 'Sascha Gros <gros.sascha@gmail.com>',
-    'date': 'Tue, 15 Mar 2016 16:34:11 +0100',
-    'message-id': '<CAMi8U0EE6C5d=AOc-+NJ25=A9FFQOECWQLKoT3naruW5=y3z6Q@mail.gmail.com>',
-    'subject': 'Test 4',
-    'to': 'genie@clowdfish.com',
-    'content-type': 'multipart/alternative; boundary=001a11479b02225bdf052e1822f2'
+{ "html": "<div dir=\"ltr\">Wuhu</div>\n",
+  "text": "Wuhu\n",
+  "headers":
+  { "return-path": "<gros.sascha@gmail.com>",
+    "envelope-to": "genie@clowdfish.com",
+    "delivery-date": "Tue, 15 Mar 2016 10:34:31 -0500",
+    "received":
+    [ "from mail-qk0-f177.google.com ([209.85.220.177]:33242) by serv01.c10683.sgvps.net with esmtps (TLSv1.2:AES128-GCM-SHA256:128) (Exim 4.86) (envelope-from <gros.sascha@gmail.com>) id 1afqzP-0006P6-Ht for genie@clowdfish.com; Tue, 15 Mar 2016 10:34:31 -0500",
+      "by mail-qk0-f177.google.com with SMTP id s5so8444134qkd.0 for <genie@clowdfish.com>; Tue, 15 Mar 2016 08:34:31 -0700 (PDT)",
+      "by 10.55.7.18 with HTTP; Tue, 15 Mar 2016 08:34:11 -0700 (PDT)" ],
+    "dkim-signature": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113; h=mime-version:from:date:message-id:subject:to; bh=ZF7GCVaK8pONu0M/a1yc7TA9yN3NUlhBQ7a3ik1vVKQ=; b=nh3ielikk3PZQ0+3dTB2ziNOEbmSJ0iXDvaCUmFtCtyoMGksN2D6hoHH2BHh5wFSDH WV9gn1M9Q9xoCaTYSn/InZWpFcyKgTWXrOS5gsqPAnJU9X6ZGD9h98nzYpYtIcDgVkCr rPfRjrFLNPuUpi0JjBc5gx+MmQUkYeY4Y/HZfRi5M/iLQBqy+OLAblTIge9+PP1s5fO+ RTdq8mAOBqMrT/BXgdrO4JjT3bMSK0EPTJBM/wS7o4IwOOYUUOy1qKVoTXsQ0bcVO3Dq OaF9lqALMhKi0G+FF9M5vEM0MCljKrbSi5/MwXLMXwitKRxn8Oq2lHtJJ9Jzb9vkO9uC M/mQ==",
+    "x-google-dkim-signature": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20130820; h=x-gm-message-state:mime-version:from:date:message-id:subject:to; bh=ZF7GCVaK8pONu0M/a1yc7TA9yN3NUlhBQ7a3ik1vVKQ=; b=AvVUspsRlaTpLqRLDUorirJdDVWkGnbgbyDa0MP0wLqA2dq8qseHDSxUVbFALmlzyI fi7lWd8ry1Sg6bpMl5uCoVOB7x3ZNm0kBOXVkgBK3U8sf1J94emCqId9laELi4x5fsEb OuF7pnRtD7emsv0VYkpk3y56OdPg/F4Bg+QGBK3g5CTTdJR11YC6O6SqGtei2+o3cxFk xmLbxrQS9y5YqFXfRElknRxGKO1s8ht4JBuAnaPwXe0dFLjKqWARIK+Ax5bEuNnLVzJB jCiIqLhE5D8jWTbZHI8fcF/EyyfrlQwBKkelD//J190SHwUlpQxGRRlUgZAVhTA75FJv FCFA==",
+    "x-gm-message-state": "AD7BkJKAk43D2JvOIrk9ad8W3XZKDFjvyWV1sX/iA97ZszCoZLAIj8pQ1j1Bqf4ZTLU9Ase7YhCxAIn2QVB81w==",
+    "x-received": "by 10.55.26.86 with SMTP id a83mr37963661qka.79.1458056070321; Tue, 15 Mar 2016 08:34:30 -0700 (PDT)",
+    "mime-version": "1.0",
+    "from": "Sascha Gros <gros.sascha@gmail.com>",
+    "date": "Tue, 15 Mar 2016 16:34:11 +0100",
+    "message-id": "<CAMi8U0EE6C5d=AOc-+NJ25=A9FFQOECWQLKoT3naruW5=y3z6Q@mail.gmail.com>",
+    "subject": "Test 4",
+    "to": "genie@clowdfish.com",
+    "content-type": "multipart/alternative; boundary=001a11479b02225bdf052e1822f2"
   },
-  'subject': 'Test 4',
-  'messageId': 'CAMi8U0EE6C5d=AOc-+NJ25=A9FFQOECWQLKoT3naruW5=y3z6Q@mail.gmail.com',
-  'priority': 'normal',
-  'from': [ { 'address': 'gros.sascha@gmail.com', 'name': 'Sascha Gros' } ],
-  'to': [ { 'address': 'genie@clowdfish.com', 'name': '' } ],
-  'date': 'Tue Mar 15 2016 16:34:11 GMT+0100 (W. Europe Standard Time)',
-  'receivedDate': 'Tue Mar 15 2016 16:34:31 GMT+0100 (W. Europe Standard Time)'
+  "subject": "Test 4",
+  "messageId": "CAMi8U0EE6C5d=AOc-+NJ25=A9FFQOECWQLKoT3naruW5=y3z6Q@mail.gmail.com",
+  "priority": "normal",
+  "from": [
+    { "address": "gros.sascha@gmail.com", "name": "Sascha Gros" }
+  ],
+  "to": [
+    { "address": "genie@clowdfish.com", "name": "" }
+  ],
+  "date": "Tue Mar 15 2016 16:34:11 GMT+0100 (W. Europe Standard Time)",
+  "receivedDate": "Tue Mar 15 2016 16:34:31 GMT+0100 (W. Europe Standard Time)"
 }

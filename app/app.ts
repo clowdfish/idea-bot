@@ -1,5 +1,4 @@
 import MailAdapterModule = require("./adapter/email");
-var mockemail = require("./mock/email2");
 
 export class IdeaBot {
 
@@ -18,9 +17,5 @@ export class IdeaBot {
         this.adapters.forEach(function(adapter) {
            adapter.destroy();
         });
-    }
-
-    newEmail() {
-        MailAdapterModule.EmailAdapter.parse(mockemail.emailjson);
     }
 }
