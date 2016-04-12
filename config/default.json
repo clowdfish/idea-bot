@@ -1,4 +1,6 @@
 {
+  "host": "http://localhost/",
+  "port": 10010,
   "username": "genie@clowdfish.com",
   "password": "answer42!",
   "imap": {
@@ -13,5 +15,9 @@
     "apiKey": "key-24d71ce06fcd86621d81ec2820c791df",
     "domain": "mg.clowdfish.com"
   },
-  "receiver": "info@clowdfish.com"
+  "receiver": "info@clowdfish.com",
+  "messages": {
+    "new": "<h1>Hello Colleagues</h1><p>Thank you for including me!</p><p>I set up the idea for ya'll. Follow the link below to get going!</p><div><a href='{{idea_link}}'>Idea Page: {{idea_title}}</a></div>",
+    "old": "<h1>Hello Colleagues</h1><p>Thank you for including me!</p><p>This idea is already in the Database! Here is the link for that one, but I guess I should just stop writing you. Don't include me in these conversations anymore!</p><div><a href='{{idea_link}}'>Idea Page: {{idea_title}}</a></div>"
+  }
 }

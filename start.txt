@@ -1,3 +1,0 @@
-node dist/index
-
-gulp live
