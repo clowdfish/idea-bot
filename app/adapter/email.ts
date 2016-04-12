@@ -42,6 +42,8 @@ export class EmailAdapter implements Adapter {
           EmailAdapter.listener.start();
         })
         .on('mail', function (mail) {
+          console.log("New email retrieved.");
+
           EmailAdapter.parse(mail);
         })
         .start();
@@ -58,6 +60,7 @@ export class EmailAdapter implements Adapter {
   static parse(email:Email) {
 
     var postBody = new EmailParser().parseMessage(email);
+    console.log("Email parsed.");
 
     var postOptions = {
       host: config.get('host'),
@@ -67,7 +70,7 @@ export class EmailAdapter implements Adapter {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Length': postBody.length
+        'Content-Length': JSON.stringify(postBody).length
       }
     };
 
@@ -84,6 +87,8 @@ export class EmailAdapter implements Adapter {
           var responseObject = JSON.parse(response);
 
           if (responseObject.hasOwnProperty("key")) {
+            console.log("Email data stored to database.");
+
             var message = new EmailComposer().createMessage(responseObject.key, postBody.title, responseObject.isNew);
             EmailAdapter.respond(postBody.owners, postBody.title, message);
           }
@@ -96,7 +101,7 @@ export class EmailAdapter implements Adapter {
       });
     });
 
-    postReq.write(postBody);
+    postReq.write(JSON.stringify(postBody));
     postReq.end();
   }
 

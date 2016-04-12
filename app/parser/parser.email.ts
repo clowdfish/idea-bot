@@ -39,12 +39,12 @@ export class EmailParser implements Parser {
         }
       });
 
-    return JSON.stringify({
+    return {
       title: title,
       description: email.text,
       creator: email.from[0].address,
       owners: owners,
       messages: [ message ]
-    });
+    };
   }
 }
