@@ -22,10 +22,12 @@ interface Adapter {
  */
 interface Email {
 
-  date: string;
   from: Contact[];
   to: Contact[];
-  cc: Contact[];
+  cc?: Contact[];
+
+  date: string;
+  
   subject: string;
   text: string;
 }

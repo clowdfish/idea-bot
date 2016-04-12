@@ -80,16 +80,19 @@ export class EmailAdapter implements Adapter {
       });
 
       res.on('end', function () {
-        console.log("end");
+        try {
+          var responseObject = JSON.parse(response);
 
-        var responseObject = JSON.parse(response);
-
-        if (responseObject.hasOwnProperty("key")) {
-          var message = new EmailComposer().createMessage(responseObject.key, postBody.title, responseObject.isNew);
-          EmailAdapter.respond(postBody.owners, postBody.title, message);
+          if (responseObject.hasOwnProperty("key")) {
+            var message = new EmailComposer().createMessage(responseObject.key, postBody.title, responseObject.isNew);
+            EmailAdapter.respond(postBody.owners, postBody.title, message);
+          }
+          else
+            console.error("Something wrong with reply from API.");
         }
-        else 
-          console.error("Something wrong with reply from API");
+        catch(ex) {
+          console.error("Error in API response: " + ex.message);
+        }
       });
     });
 

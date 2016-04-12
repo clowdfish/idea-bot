@@ -1,5 +1,5 @@
 {
-  "host": "http://localhost/",
+  "host": "localhost",
   "port": 10010,
   "username": "genie@clowdfish.com",
   "password": "answer42!",

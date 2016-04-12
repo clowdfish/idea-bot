@@ -1,3 +1,5 @@
+import config = require('config');
+
 /**
  * Email parser for simple email data structures. Simple means, that no email
  * conversation should be included in the email body, since they are not parsed
@@ -19,22 +21,23 @@ export class EmailParser implements Parser {
     var owners = [];
 
     email.from.forEach(function (contact) {
-      if (contact.address != "genie@clowdfish.com") {
+      if (contact.address != config.get('username')) {
         owners.push(contact.address);
       }
     });
 
     email.to.forEach(function (contact) {
-      if (contact.address != "genie@clowdfish.com") {
+      if (contact.address != config.get('username')) {
         owners.push(contact.address);
       }
     });
 
-    email.cc.forEach(function (contact) {
-      if (contact.address != "genie@clowdfish.com") {
-        owners.push(contact.address);
-      }
-    });
+    if(email.cc)
+      email.cc.forEach(function (contact) {
+        if (contact.address != config.get('username')) {
+          owners.push(contact.address);
+        }
+      });
 
     return JSON.stringify({
       title: title,
